@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Freya Dental - Inicio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            margin: 0; 
+            background-color: #171c22; 
+            color: #d1c4e9; 
+        }
+
+        header { 
+            background-color: #0f1216; 
+            color: #e5c158; 
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 4px solid #4a2a6b;
+        }
+
+        header img {
+            height: 75px;
+            width: auto;
+            border-radius: 8px;
+            display: block;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        header p {
+            margin: 0;
+            color: #ffffff;
+            font-size: 0.9rem;
+        }
+
+        .contenedor { 
+            display: flex; 
+        }
+
+        nav { 
+            width: 220px; 
+            background-color: #2d1f3d; 
+            padding: 20px;
+            min-height: 75vh;
+        }
+
+        nav ul { 
+            list-style: none; 
+            padding: 0; 
+        }
+
+        nav li { 
+            margin-bottom: 12px; 
+        }
+
+        nav a { 
+            text-decoration: none; 
+            color: #ffffff; 
+            font-weight: 600;
+            display: block;
+            padding: 12px;
+            border-radius: 6px;
+        }
+
+        nav a:hover { 
+            background-color: #4a2a6b; 
+            color: #e5c158;
+        }
+
+        .activo {
+            background-color: #4a2a6b;
+            color: #e5c158;
+        }
+
+        main { 
+            flex: 1; 
+            padding: 40px; 
+            background-color: #1c2229;
+        }
+
+        main h2 {
+            color: #e5c158;
+            margin-top: 0;
+        }
+
+        .galeria-inicio {
+            margin-top: 30px;
+        }
+
+        .galeria-inicio img {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 10px;
+            border: 2px solid #4a2a6b;
+            display: block;
+        }
+
+        footer { 
+            background-color: #0f1216; 
+            color: white; 
+            padding: 20px; 
+            text-align: center;
+            font-size: 0.9rem;
+            border-top: 3px solid #e5c158;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="logo.png" alt="Logo Freya Dental">
+        <div>
+            <h1>Freya Dental</h1>
+            <p>Clínica Encantada</p>
+        </div>
+    </header>
+
+    <div class="contenedor">
+        <nav>
+            <ul>
+                <li><a href="index.html" class="activo">Inicio</a></li>
+                <li><a href="pacientes.html">Pacientes</a></li>
+                <li><a href="citas.html">Citas</a></li>
+                <li><a href="tratamiento.html">Tratamientos</a></li>
+                <li><a href="historial.html">Historial Médico</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <h2>Bienvenidos a la Clínica Encantada</h2>
+            <p>Un espacio donde la magia y la odontología se unen. Usa el menú de la izquierda para navegar por las secciones.</p>
+
+            <div class="galeria-inicio">
+                <img src="clinica.jpg" alt="Instalaciones Freya Dental">
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p><strong>Nombre completo:</strong> Bianca Yuridia Nevarez Carvajal | <strong>No. control:</strong> 24308051280603</p>
+        <p><strong>Semestre:</strong> 4to | <strong>Grupo:</strong> I | <strong>Especialidad:</strong> Programación</p>
+    </footer>
+
+</body>
+</html>
