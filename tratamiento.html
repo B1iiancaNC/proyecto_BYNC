@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Freya Dental - Tratamientos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Ajustamos la fuente de Google, limpiamos márgenes y ponemos el fondo oscuro de la clínica */
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            margin: 0; 
+            background-color: #171c22; 
+            color: #d1c4e9; 
+        }
+
+        /* La barra del título superior con el logo alineado a la izquierda */
+        header { 
+            background-color: #0f1216; 
+            color: #e5c158; 
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 4px solid #4a2a6b;
+        }
+
+        header img {
+            height: 75px;
+            width: auto;
+            border-radius: 8px;
+            display: block;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        header p {
+            margin: 0;
+            color: #ffffff;
+            font-size: 0.9rem;
+        }
+
+        /* Caja contenedora para acomodar el menú y el contenido en paralelo */
+        .contenedor { 
+            display: flex; 
+        }
+
+        /* Estilos de la barra de navegación lateral y el cambio de color al pasar el cursor */
+        nav { 
+            width: 220px; 
+            background-color: #2d1f3d; 
+            padding: 20px;
+            min-height: 75vh;
+        }
+
+        nav ul { 
+            list-style: none; 
+            padding: 0; 
+        }
+
+        nav li { 
+            margin-bottom: 12px; 
+        }
+
+        nav a { 
+            text-decoration: none; 
+            color: #ffffff; 
+            font-weight: 600;
+            display: block;
+            padding: 12px;
+            border-radius: 6px;
+        }
+
+        nav a:hover { 
+            background-color: #4a2a6b; 
+            color: #e5c158;
+        }
+
+        .activo {
+            background-color: #4a2a6b;
+            color: #e5c158;
+        }
+
+        /* Espacio para el contenido principal y la tarjeta del formulario */
+        main { 
+            flex: 1; 
+            padding: 40px; 
+            background-color: #1c2229;
+        }
+
+        main h2 {
+            color: #e5c158;
+            margin-top: 0;
+        }
+
+        .form-container {
+            max-width: 600px;
+            background: #1e252d;
+            padding: 35px;
+            border-radius: 12px;
+            border: 1px solid #4a2a6b;
+            border-top: 6px solid #e5c158;
+            margin-top: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #e5c158;
+            font-size: 14px;
+        }
+        
+        /* Diseño unificado para todos los campos de entrada y menús desplegables */
+        input[type="text"], select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #4a2a6b;
+            border-radius: 6px;
+            font-family: "Poppins", sans-serif;
+            font-size: 14px;
+            background-color: #171c22;
+            color: #ffffff;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #e5c158;
+            background-color: #1e252d;
+            box-shadow: 0 0 5px rgba(229, 193, 88, 0.4);
+        }
+
+        /* Estilos de los botones para guardar datos y desbloquear vistas */
+        .btn-submit {
+            background-color: #4a2a6b;
+            color: #e5c158;
+            border: 1px solid #e5c158;
+            padding: 14px 15px;
+            width: 100%;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: "Poppins", sans-serif;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: #e5c158;
+            color: #171c22;
+        }
+
+        .btn-unlock {
+            background-color: #4a2a6b;
+            color: #e5c158;
+            border: 1px solid #e5c158;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: "Poppins", sans-serif;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-unlock:hover {
+            background-color: #e5c158;
+            color: #171c22;
+        }
+
+        /* Contenedor de la tabla con soporte de scroll horizontal */
+        .table-container {
+            margin-top: 35px;
+            background: #1e252d;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #4a2a6b;
+            overflow-x: auto;
+        }
+
+        .table-container h3 {
+            color: #e5c158;
+            margin-top: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            color: #ffffff;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #4a2a6b;
+            font-size: 14px;
+        }
+
+        th {
+            color: #e5c158;
+            font-weight: 600;
+        }
+
+        /* Botón de eliminación en color rojo opaco */
+        .btn-delete {
+            background-color: #721c24;
+            color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .btn-delete:hover {
+            background-color: #f5c6cb;
+            color: #721c24;
+        }
+
+        footer { 
+            background-color: #0f1216; 
+            color: white; 
+            padding: 20px; 
+            text-align: center;
+            font-size: 0.9rem;
+            border-top: 3px solid #e5c158;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="logo.png" alt="Logo Freya Dental">
+        <div>
+            <h1>Freya Dental</h1>
+            <p>Clínica Encantada</p>
+        </div>
+    </header>
+
+    <div class="contenedor">
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="pacientes.html">Pacientes</a></li>
+                <li><a href="citas.html">Citas</a></li>
+                <li><a href="tratamiento.html" class="activo">Tratamientos</a></li>
+                <li><a href="historial.html">Historial Médico</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <h2>Planes de Tratamiento</h2>
+            <p>Registro de diagnósticos clínicos mediante odontograma y seguimiento de procedimientos planificados.</p>
+
+            <button id="btn-mostrar-form" class="btn-unlock" onclick="verificarContrasenaFormulario()">Registrar Nuevo Plan Clínico</button>
+
+            <div id="registro-container" class="form-container" style="display: none;">
+                <form id="form-tratamientos"> 
+                    
+                    <div class="form-group">
+                        <label>Paciente:</label>
+                        <input type="text" name="paciente" placeholder="Ej: Ana Sofía López Ruiz" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Hallazgo Principal (Odontograma):</label>
+                        <input type="text" name="hallazgo" placeholder="Ej: Caries profunda en órgano dentario 46" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tratamiento Planificado:</label>
+                        <input type="text" name="tratamiento_planificado" placeholder="Ej: Endodoncia, resina, guarda oclusal, etc." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Estado del Plan:</label>
+                        <select name="estado_plan" required>
+                            <option value="No Iniciado"> No Iniciado (Presupuestado)</option>
+                            <option value="En Curso"> En Curso (En Tratamiento)</option>
+                            <option value="Completado"> Completado con Éxito</option>
+                            <option value="Suspendido"> Suspendido por el Paciente</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Registrar Plan Clínico</button>
+                </form>
+            </div>
+
+            <div class="table-container">
+                <h3>Planes Clínicos Registrados</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Paciente</th>
+                            <th>Hallazgo Principal</th>
+                            <th>Tratamiento Planificado</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-tratamientos-body">
+                        </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p><strong>Nombre completo:</strong> Bianca Yuridia Nevarez Carvajal | <strong>No. control:</strong> 24308051280603</p>
+        <p><strong>Semestre:</strong> 4to | <strong>Grupo:</strong> I | <strong>Especialidad:</strong> Programación</p>
+    </footer>
+
+    <script>
+        // La contraseña requerida para las acciones del sistema
+        const CLAVE_ACCESO = "freya123";
+
+        // Verifica la contraseña mediante un prompt para mostrar el formulario oculto
+        function verificarContrasenaFormulario() {
+            let psw = prompt("Ingrese la contraseña de seguridad para abrir el registro de tratamientos:");
+            if (psw === CLAVE_ACCESO) {
+                document.getElementById('registro-container').style.display = 'block';
+                document.getElementById('btn-mostrar-form').style.display = 'none';
+            } else {
+                alert("Contraseña inválida. Acceso denegado.");
+            }
+        }
+
+        // Busca los registros de tratamientos en LocalStorage y nos da una lista limpia
+        function obtenerTratamientosBaseDatos() {
+            return JSON.parse(localStorage.getItem('tratamientos')) || [];
+        }
+
+        // Limpia las filas anteriores de la tabla y dibuja los planes actualizados desde el LocalStorage
+        function actualizarTablaTratamientos() {
+            const tratamientos = obtenerTratamientosBaseDatos();
+            const tablaBody = document.getElementById('tabla-tratamientos-body');
+            tablaBody.innerHTML = ''; 
+
+            if (tratamientos.length === 0) {
+                tablaBody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#ffffff;">No hay planes clínicos registrados actualmente.</td></tr>';
+                return;
+            }
+
+            tratamientos.forEach((item, idx) => {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `
+                    <td><strong>${item.paciente}</strong></td>
+                    <td>${item.hallazgo}</td>
+                    <td>${item.planificado}</td>
+                    <td>${item.estado}</td>
+                    <td><button class="btn-delete" onclick="borrarRegistroTratamiento(${idx})">Eliminar</button></td>
+                `;
+                tablaBody.appendChild(fila);
+            });
+        }
+
+        // Captura el evento cuando se envía el formulario, agrupa los valores y los guarda en el navegador
+        document.getElementById('form-tratamientos').addEventListener('submit', function(e) {
+            e.preventDefault(); // Detiene la recarga automática de la página
+            
+            const nuevoTratamiento = {
+                paciente: this.paciente.value,
+                hallazgo: this.hallazgo.value,
+                planificado: this.tratamiento_planificado.value,
+                estado: this.estado_plan.value
+            };
+
+            let tratamientos = obtenerTratamientosBaseDatos();
+            tratamientos.push(nuevoTratamiento);
+            localStorage.setItem('tratamientos', JSON.stringify(tratamientos));
+
+            alert('¡Plan clínico guardado con éxito en la base de datos local!');
+            this.reset();
+            document.getElementById('registro-container').style.display = 'none';
+            document.getElementById('btn-mostrar-form').style.display = 'block';
+            actualizarTablaTratamientos(); 
+        });
+
+        // Elimina el plan clínico seleccionado de LocalStorage pidiendo confirmación de administrador
+        function borrarRegistroTratamiento(index) {
+            let psw = prompt("Se requieren privilegios de administración. Ingrese la contraseña para eliminar:");
+            if (psw === CLAVE_ACCESO) {
+                let tratamientos = obtenerTratamientosBaseDatos();
+                tratamientos.splice(index, 1); 
+                localStorage.setItem('tratamientos', JSON.stringify(tratamientos));
+                alert('Plan clínico removido con éxito.');
+                actualizarTablaTratamientos();
+            } else {
+                alert("Clave incorrecta. Operación cancelada.");
+            }
+        }
+
+        // Hace que la tabla aparezca llena con lo que esté guardado al abrir la página
+        window.onload = actualizarTablaTratamientos;
+    </script>
+</body>
+</html>
