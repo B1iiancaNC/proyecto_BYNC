@@ -1,0 +1,428 @@
+<!DOCTYPE html>  
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Freya Dental - Citas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Configuramos la tipografía de Google, quitamos márgenes raros y ponemos el fondo oscuro */
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            margin: 0; 
+            background-color: #171c22; 
+            color: #d1c4e9; 
+        }
+
+        /* La barra de arriba donde va el logo. Usamos flex para que los elementos se acomoden de lado a lado */
+        header { 
+            background-color: #0f1216; 
+            color: #e5c158; 
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 4px solid #4a2a6b;
+        }
+
+        header img {
+            height: 75px;
+            width: auto;
+            border-radius: 8px;
+            display: block;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        header p {
+            margin: 0;
+            color: #ffffff;
+            font-size: 0.9rem;
+        }
+
+        /* El contenedor ayuda a que el menú lateral y la sección principal se pongan juntos en fila */
+        .contenedor { 
+            display: flex; 
+        }
+
+        /* Estilos del menú de la izquierda y el efecto hover para cuando pasas el ratón por los enlaces */
+        nav { 
+            width: 220px; 
+            background-color: #2d1f3d; 
+            padding: 20px;
+            min-height: 75vh;
+        }
+
+        nav ul { 
+            list-style: none; 
+            padding: 0; 
+        }
+
+        nav li { 
+            margin-bottom: 12px; 
+        }
+
+        nav a { 
+            text-decoration: none; 
+            color: #ffffff; 
+            font-weight: 600;
+            display: block;
+            padding: 12px;
+            border-radius: 6px;
+        }
+
+        nav a:hover { 
+            background-color: #4a2a6b; 
+            color: #e5c158;
+        }
+
+        .activo {
+            background-color: #4a2a6b;
+            color: #e5c158;
+        }
+
+        /* La zona derecha de la pantalla y el diseño de la tarjeta del formulario */
+        main { 
+            flex: 1; 
+            padding: 40px; 
+            background-color: #1c2229;
+        }
+
+        main h2 {
+            color: #e5c158;
+            margin-top: 0;
+        }
+
+        .form-container {
+            max-width: 600px;
+            background: #1e252d;
+            padding: 35px;
+            border-radius: 12px;
+            border: 1px solid #4a2a6b;
+            border-top: 6px solid #e5c158;
+            margin-top: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #e5c158;
+            font-size: 14px;
+        }
+        
+        /* Diseño para que todos los cuadros de texto se vean iguales, cambien de color y brillen al hacer clic */
+        input[type="text"], input[type="number"], input[type="date"], input[type="time"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #4a2a6b;
+            border-radius: 6px;
+            font-family: "Poppins", sans-serif;
+            font-size: 14px;
+            background-color: #171c22;
+            color: #ffffff;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #e5c158;
+            background-color: #1e252d;
+            box-shadow: 0 0 5px rgba(229, 193, 88, 0.4);
+        }
+
+        /* Estilos de los botones del sistema (guardar y desbloquear) */
+        .btn-submit {
+            background-color: #4a2a6b;
+            color: #e5c158;
+            border: 1px solid #e5c158;
+            padding: 14px 15px;
+            width: 100%;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: "Poppins", sans-serif;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: #e5c158;
+            color: #171c22;
+        }
+
+        .btn-unlock {
+            background-color: #4a2a6b;
+            color: #e5c158;
+            border: 1px solid #e5c158;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: "Poppins", sans-serif;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-unlock:hover {
+            background-color: #e5c158;
+            color: #171c22;
+        }
+
+        /* Contenedor de la tabla con scroll para que no se rompa el diseño en celulares */
+        .table-container {
+            margin-top: 35px;
+            background: #1e252d;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #4a2a6b;
+            overflow-x: auto;
+        }
+
+        .table-container h3 {
+            color: #e5c158;
+            margin-top: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            color: #ffffff;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #4a2a6b;
+            font-size: 14px;
+        }
+
+        th {
+            color: #e5c158;
+            font-weight: 600;
+        }
+
+        /* Botón rojo para eliminar registros con su respectivo cambio de color */
+        .btn-delete {
+            background-color: #721c24;
+            color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .btn-delete:hover {
+            background-color: #f5c6cb;
+            color: #721c24;
+        }
+
+        footer { 
+            background-color: #0f1216; 
+            color: white; 
+            padding: 20px; 
+            text-align: center;
+            font-size: 0.9rem;
+            border-top: 3px solid #e5c158;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="logo.png" alt="Logo Freya Dental">
+        <div>
+            <h1>Freya Dental</h1>
+            <p>Clínica Encantada</p>
+        </div>
+    </header>
+
+    <div class="contenedor">
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="pacientes.html">Pacientes</a></li>
+                <li><a href="citas.html" class="activo">Citas</a></li>
+                <li><a href="tratamiento.html">Tratamientos</a></li>
+                <li><a href="historial.html">Historial Médico</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <h2>Agenda de Citas</h2>
+            <p>Monitoreo de próximas consultas, control de asistencia y notificaciones a pacientes.</p>
+
+            <button id="btn-mostrar-form" class="btn-unlock" onclick="verificarContrasenaFormulario()">Registrar Nueva Cita</button>
+
+            <div id="registro-container" class="form-container" style="display: none;">
+                <form id="form-citas"> 
+                    <div class="form-group">
+                        <label>Nombre del Paciente:</label>
+                        <input type="text" id="paciente" placeholder="Ej: Ana Sofía López Ruiz" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Fecha de la Próxima Cita:</label>
+                        <input type="date" id="fecha_cita" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Hora de la Cita:</label>
+                        <input type="time" id="hora_cita" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Motivo de la Cita:</label>
+                        <input type="text" id="motivo" placeholder="Ej: Resina, Extracción, Limpieza" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Recordatorio Enviado:</label>
+                        <select id="recordatorio_enviado" required style="width: 100%; padding: 12px; border: 1px solid #4a2a6b; border-radius: 6px; font-family: 'Poppins', sans-serif; font-size: 14px; background-color: #171c22; color: #ffffff;">
+                            <option value="No">No enviado</option>
+                            <option value="Sí (WhatsApp)">Sí, por WhatsApp</option>
+                            <option value="Sí (Correo)">Sí, por Correo Electrónico</option>
+                            <option value="Sí (Llamada)">Sí, por Llamada Telefónica</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Estado de la Cita:</label>
+                        <select id="estado_cita" required style="width: 100%; padding: 12px; border: 1px solid #4a2a6b; border-radius: 6px; font-family: 'Poppins', sans-serif; font-size: 14px; background-color: #171c22; color: #ffffff;">
+                            <option value="Pendiente">Pendiente de Confirmar</option>
+                            <option value="Confirmada">Confirmada por el Paciente</option>
+                            <option value="Cancelada">Cancelada</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Registrar Cita en Agenda</button>
+                </form>
+            </div>
+
+            <div class="table-container">
+                <h3>Citas Agendadas</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Paciente</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Motivo</th>
+                            <th>Recordatorio</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-citas-body"></tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p><strong>Nombre completo:</strong> Bianca Yuridia Nevarez Carvajal | <strong>No. control:</strong> 24308051280603</p>
+        <p><strong>Semestre:</strong> 4to | <strong>Grupo:</strong> I | <strong>Especialidad:</strong> Programación</p>
+    </footer>
+
+    <script>
+        // Contraseña para abrir el formulario y para borrar registros
+        const CLAVE_ACCESO = "freya123";
+
+        // Pide la clave; si coincide, oculta el botón y muestra el cuadro del formulario
+        function verificarContrasenaFormulario() {
+            let psw = prompt("Ingrese la contraseña de seguridad para abrir el registro de citas:");
+            if (psw === CLAVE_ACCESO) {
+                document.getElementById('registro-container').style.display = 'block';
+                document.getElementById('btn-mostrar-form').style.display = 'none';
+            } else {
+                alert("Contraseña inválida. Acceso denegado.");
+            }
+        }
+
+        // Va al almacenamiento interno del navegador a buscar las citas o devuelve una lista vacía si no hay nada
+        function obtenerCitasBaseDatos() {
+            return JSON.parse(localStorage.getItem('citas')) || [];
+        }
+
+        // Borra las filas viejas de la tabla y dibuja las nuevas que lee desde LocalStorage
+        function actualizarTablaCitas() {
+            const citas = obtenerCitasBaseDatos();
+            const tablaBody = document.getElementById('tabla-citas-body');
+            tablaBody.innerHTML = '';
+
+            if (citas.length === 0) {
+                tablaBody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:#ffffff;">No hay citas agendadas.</td></tr>';
+                return;
+            }
+
+            citas.forEach((cita, idx) => {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `
+                    <td>${cita.paciente}</td>
+                    <td>${cita.fecha}</td>
+                    <td>${cita.hora}</td>
+                    <td>${cita.motivo}</td>
+                    <td>${cita.recordatorio}</td>
+                    <td>${cita.estado}</td>
+                    <td><button class="btn-delete" onclick="borrarRegistroCita(${idx})">Eliminar</button></td>
+                `;
+                tablaBody.appendChild(fila);
+            });
+        }
+
+        // Captura el envío del formulario, guarda los datos, avisa al usuario y reinicia la interfaz
+        document.getElementById('form-citas').addEventListener('submit', function(e) {
+            e.preventDefault(); // Evita que la página se recargue sola
+            const nuevaCita = {
+                paciente: document.getElementById('paciente').value,
+                fecha: document.getElementById('fecha_cita').value,
+                hora: document.getElementById('hora_cita').value,
+                motivo: document.getElementById('motivo').value,
+                recordatorio: document.getElementById('recordatorio_enviado').value,
+                estado: document.getElementById('estado_cita').value
+            };
+
+            let citas = obtenerCitasBaseDatos();
+            citas.push(nuevaCita);
+            localStorage.setItem('citas', JSON.stringify(citas));
+
+            alert('¡Cita registrada con éxito en la base de datos local!');
+            this.reset();
+            document.getElementById('registro-container').style.display = 'none';
+            document.getElementById('btn-mostrar-form').style.display = 'block';
+            actualizarTablaCitas();
+        });
+
+        // Pide confirmación con contraseña para eliminar la cita seleccionada de la lista
+        function borrarRegistroCita(index) {
+            let psw = prompt("Se requieren privilegios de administración. Ingrese la contraseña para eliminar la cita:");
+            if (psw === CLAVE_ACCESO) {
+                let citas = obtenerCitasBaseDatos();
+                citas.splice(index, 1);
+                localStorage.setItem('citas', JSON.stringify(citas));
+                alert('Cita removida con éxito.');
+                actualizarTablaCitas();
+            } else {
+                alert("Clave incorrecta. Operación cancelada.");
+            }
+        }
+
+        // Apenas cargue la web por completo, mostramos las citas que tengamos guardadas
+        window.onload = actualizarTablaCitas;
+    </script>
+</body>
+</html>
